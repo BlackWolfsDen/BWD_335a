@@ -254,7 +254,7 @@ ElunaRegister<Unit> UnitMethods[] =
     { "GetBaseSpellPower", &LuaUnit::GetBaseSpellPower },                 // :GetBaseSpellPower()
 #if (!defined(TBC) && !defined(CLASSIC))
     { "GetVehicleKit", &LuaUnit::GetVehicleKit },                         // :GetVehicleKit() - Gets unit's Vehicle kit if the unit is a vehicle
-    // {"GetVehicle", &LuaUnit::GetVehicle},                            // :GetVehicle() - Gets the Vehicle kit of the vehicle the unit is on
+    {"GetVehicle", &LuaUnit::GetVehicle},                            // :GetVehicle() - Gets the Vehicle kit of the vehicle the unit is on
 #endif
 
     // Setters
@@ -273,17 +273,17 @@ ElunaRegister<Unit> UnitMethods[] =
     { "SetPhaseMask", &LuaUnit::SetPhaseMask },               // :SetPhaseMask(Phase[, update]) - Sets the phase of the unit
 #endif
     { "SetSpeed", &LuaUnit::SetSpeed },                       // :SetSpeed(type, speed[, forced]) - Sets speed for the movement type (0 = walk, 1 = run ..)
-    // {"SetStunned", &LuaUnit::SetStunned},                // :SetStunned([enable]) - Stuns or removes stun
-    // {"SetRooted", &LuaUnit::SetRooted},                  // :SetRooted([enable]) - Roots or removes root
-    // {"SetConfused", &LuaUnit::SetConfused},              // :SetConfused([enable]) - Sets confused or removes confusion
-    // {"SetFeared", &LuaUnit::SetFeared},                  // :SetFeared([enable]) - Fears or removes fear
+    {"SetStunned", &LuaUnit::SetStunned},                // :SetStunned([enable]) - Stuns or removes stun
+    {"SetRooted", &LuaUnit::SetRooted},                  // :SetRooted([enable]) - Roots or removes root
+    {"SetConfused", &LuaUnit::SetConfused},              // :SetConfused([enable]) - Sets confused or removes confusion
+    {"SetFeared", &LuaUnit::SetFeared},                  // :SetFeared([enable]) - Fears or removes fear
     { "SetPvP", &LuaUnit::SetPvP },                           // :SetPvP([apply]) - Sets the units PvP on or off
 #if (!defined(TBC) && !defined(CLASSIC))
     { "SetFFA", &LuaUnit::SetFFA },                           // :SetFFA([apply]) - Sets the units FFA tag on or off
     { "SetSanctuary", &LuaUnit::SetSanctuary },               // :SetSanctuary([apply]) - Enables or disables units sanctuary flag
 #endif
-    // {"SetCanFly", &LuaUnit::SetCanFly},                  // :SetCanFly(apply)
-    // {"SetVisible", &LuaUnit::SetVisible},                // :SetVisible(x)
+    // {"SetCanFly", &LuaUnit::SetCanFly},                    // :SetCanFly(apply)
+    {"SetVisible", &LuaUnit::SetVisible},                     // :SetVisible(x)
     { "SetOwnerGUID", &LuaUnit::SetOwnerGUID },               // :SetOwnerGUID(guid) - Sets the guid of the owner
     { "SetName", &LuaUnit::SetName },                         // :SetName(name) - Sets the unit's name
     { "SetSheath", &LuaUnit::SetSheath },                     // :SetSheath(SheathState) - Sets unit's sheathstate
@@ -326,9 +326,9 @@ ElunaRegister<Unit> UnitMethods[] =
     { "IsMounted", &LuaUnit::IsMounted },                             // :IsMounted()
     { "AttackStop", &LuaUnit::AttackStop },                           // :AttackStop()
     { "Attack", &LuaUnit::Attack },                                   // :Attack(who[, meleeAttack])
-    // {"IsVisible", &LuaUnit::IsVisible},                          // :IsVisible()
-    // {"IsMoving", &LuaUnit::IsMoving},                            // :IsMoving()
-    // {"IsFlying", &LuaUnit::IsFlying},                            // :IsFlying()
+    {"IsVisible", &LuaUnit::IsVisible},                               // :IsVisible()
+    {"IsMoving", &LuaUnit::IsMoving},                                 // :IsMoving()
+    {"IsFlying", &LuaUnit::IsFlying},                                 // :IsFlying()
     { "IsStopped", &LuaUnit::IsStopped },                             // :IsStopped()
     { "HasUnitState", &LuaUnit::HasUnitState },                       // :HasUnitState(state) - state from UnitState enum
     { "IsQuestGiver", &LuaUnit::IsQuestGiver },                       // :IsQuestGiver() - Returns true if the unit is a quest giver, false if not
@@ -367,8 +367,8 @@ ElunaRegister<Unit> UnitMethods[] =
     { "CountPctFromMaxHealth", &LuaUnit::CountPctFromMaxHealth },     // :CountPctFromMaxHealth()
     { "Dismount", &LuaUnit::Dismount },                               // :Dismount() - Dismounts the unit.
     { "Mount", &LuaUnit::Mount },                                     // :Mount(displayId) - Mounts the unit on the specified displayId.
-    // {"RestoreDisplayId", &LuaUnit::RestoreDisplayId},            // :RestoreDisplayId()
-    // {"RestoreFaction", &LuaUnit::RestoreFaction},                // :RestoreFaction()
+    {"RestoreDisplayId", &LuaUnit::RestoreDisplayId},            // :RestoreDisplayId()
+    {"RestoreFaction", &LuaUnit::RestoreFaction},                // :RestoreFaction()
     // {"RemoveBindSightAuras", &LuaUnit::RemoveBindSightAuras},    // :RemoveBindSightAuras()
     // {"RemoveCharmAuras", &LuaUnit::RemoveCharmAuras},            // :RemoveCharmAuras()
     { "ClearThreatList", &LuaUnit::ClearThreatList },                 // :ClearThreatList()
@@ -521,7 +521,7 @@ ElunaRegister<Player> PlayerMethods[] =
     { "SetReputation", &LuaPlayer::SetReputation },               // :SetReputation(faction, value) - Sets the faction reputation for the player
     { "SetFreeTalentPoints", &LuaPlayer::SetFreeTalentPoints },   // :SetFreeTalentPoints(points) - Sets the amount of unused talent points
     { "SetGuildRank", &LuaPlayer::SetGuildRank },                 // :SetGuildRank(rank) - Sets player's guild rank
-    // {"SetMovement", &LuaPlayer::SetMovement},                // :SetMovement(type) - Sets player's movement type
+    {"SetMovement", &LuaPlayer::SetMovement},                // :SetMovement(type) - Sets player's movement type
     { "SetSkill", &LuaPlayer::SetSkill },                         // :SetSkill(skill, step, currVal, maxVal) - Sets the skill's boundaries and value
     { "SetFactionForRace", &LuaPlayer::SetFactionForRace },       // :SetFactionForRace(race) - Sets the faction by raceID
     { "SetDrunkValue", &LuaPlayer::SetDrunkValue },               // :SetDrunkValue(newDrunkValue) - Sets drunkness value
@@ -636,8 +636,8 @@ ElunaRegister<Player> PlayerMethods[] =
     { "ResetAllCooldowns", &LuaPlayer::ResetAllCooldowns },                               // :ResetAllCooldowns() - Resets all spell cooldowns
     { "GiveLevel", &LuaPlayer::GiveLevel },                                               // :GiveLevel(level) - Gives levels to the player
     { "GiveXP", &LuaPlayer::GiveXP },                                                     // :GiveXP(xp[, victim, pureXP, triggerHook]) - Gives XP to the player. If pure is false, bonuses are count in. If triggerHook is false, GiveXp hook is not triggered.
-    // {"RemovePet", &LuaPlayer::RemovePet},                                            // :RemovePet([mode, returnreagent]) - Removes the player's pet. Mode determines if the pet is saved and how
-    // {"SummonPet", &LuaPlayer::SummonPet},                                            // :SummonPet(entry, x, y, z, o, petType, despwtime) - Summons a pet for the player
+    {"RemovePet", &LuaPlayer::RemovePet},                                            // :RemovePet([mode, returnreagent]) - Removes the player's pet. Mode determines if the pet is saved and how
+    {"SummonPet", &LuaPlayer::SummonPet},                                            // :SummonPet(entry, x, y, z, o, petType, despwtime) - Summons a pet for the player
     { "Say", &LuaPlayer::Say },                                                           // :Say(text, lang) - The player says the text
     { "Yell", &LuaPlayer::Yell },                                                         // :Yell(text, lang) - The player yells the text
     { "TextEmote", &LuaPlayer::TextEmote },                                               // :TextEmote(text) - The player does a textemote with the text
@@ -645,13 +645,13 @@ ElunaRegister<Player> PlayerMethods[] =
     { "CompleteQuest", &LuaPlayer::CompleteQuest },                                       // :CompleteQuest(entry) - Completes a quest by entry
     { "IncompleteQuest", &LuaPlayer::IncompleteQuest },                                   // :IncompleteQuest(entry) - Uncompletes the quest by entry for the player
     { "FailQuest", &LuaPlayer::FailQuest },                                               // :FailQuest(entry) - Player fails the quest entry
-    // {"RemoveActiveQuest", &LuaPlayer::RemoveActiveQuest},                            // :RemoveActiveQuest(entry) - Removes an active quest
-    // {"RemoveRewardedQuest", &LuaPlayer::RemoveRewardedQuest},                        // :RemoveRewardedQuest(entry) - Removes a rewarded quest
+    {"RemoveActiveQuest", &LuaPlayer::RemoveActiveQuest},                            // :RemoveActiveQuest(entry) - Removes an active quest
+    {"RemoveRewardedQuest", &LuaPlayer::RemoveRewardedQuest},                        // :RemoveRewardedQuest(entry) - Removes a rewarded quest
     { "AreaExploredOrEventHappens", &LuaPlayer::AreaExploredOrEventHappens },             // :AreaExploredOrEventHappens(questId) - Satisfies an area or event requrement for the questId
     { "GroupEventHappens", &LuaPlayer::GroupEventHappens },                               // :GroupEventHappens(questId, worldObject) - Satisfies a group event for the questId with the world object
     { "KilledMonsterCredit", &LuaPlayer::KilledMonsterCredit },                           // :KilledMonsterCredit(entry) - Satisfies a monsterkill for the player
-    // {"KilledPlayerCredit", &LuaPlayer::KilledPlayerCredit},                          // :KilledPlayerCredit() - Satisfies a player kill for the player
-    // {"KillGOCredit", &LuaPlayer::KillGOCredit},                                      // :KillGOCredit(GOEntry[, GUID]) - Credits the player for destroying a GO, guid is optional
+    {"KilledPlayerCredit", &LuaPlayer::KilledPlayerCredit},                          // :KilledPlayerCredit() - Satisfies a player kill for the player
+    {"KillGOCredit", &LuaPlayer::KillGOCredit},                                      // :KillGOCredit(GOEntry[, GUID]) - Credits the player for destroying a GO, guid is optional
     { "TalkedToCreature", &LuaPlayer::TalkedToCreature },                                 // :TalkedToCreature(npcEntry, creature) - Satisfies creature talk objective for the player
 #if (!defined(TBC) && !defined(CLASSIC))
     { "ResetPetTalents", &LuaPlayer::ResetPetTalents },                                   // :ResetPetTalents() - Resets player's pet's talents
@@ -662,7 +662,7 @@ ElunaRegister<Player> PlayerMethods[] =
     { "RemoveSpell", &LuaPlayer::RemoveSpell },                                           // :RemoveSpell(entry[, disabled, learn_low_rank]) - Removes (unlearn) the given spell
     { "ResetTalents", &LuaPlayer::ResetTalents },                                         // :ResetTalents([no_cost]) - Resets player's talents
     { "ResetTalentsCost", &LuaPlayer::ResetTalentsCost },                                 // :ResetTalentsCost() - Returns the reset talents cost
-    // {"AddTalent", &LuaPlayer::AddTalent},                                            // :AddTalent(spellid, spec, learning) - Adds a talent spell for the player to given spec
+    {"AddTalent", &LuaPlayer::AddTalent},                                            // :AddTalent(spellid, spec, learning) - Adds a talent spell for the player to given spec
     { "RemoveFromGroup", &LuaPlayer::RemoveFromGroup },                                   // :RemoveFromGroup() - Removes the player from his group
     { "KillPlayer", &LuaPlayer::KillPlayer },                                             // :KillPlayer() - Kills the player
     { "DurabilityLossAll", &LuaPlayer::DurabilityLossAll },                               // :DurabilityLossAll(percent[, inventory]) - The player's items lose durability. Inventory true by default
@@ -977,7 +977,7 @@ ElunaRegister<Quest> QuestMethods[] =
     // Getters
     { "GetId", &LuaQuest::GetId },
     { "GetLevel", &LuaQuest::GetLevel },
-    // {"GetMaxLevel", &LuaQuest::GetMaxLevel},                   // :GetMaxLevel() - Returns the quest's max level
+    {"GetMaxLevel", &LuaQuest::GetMaxLevel},                   // :GetMaxLevel() - Returns the quest's max level
     { "GetMinLevel", &LuaQuest::GetMinLevel },
     { "GetNextQuestId", &LuaQuest::GetNextQuestId },
     { "GetPrevQuestId", &LuaQuest::GetPrevQuestId },
@@ -1020,7 +1020,7 @@ ElunaRegister<Group> GroupMethods[] =
     // {"IsLFGGroup", &LuaGroup::IsLFGGroup},                     // :IsLFGGroup() - Returns true if the group is an LFG group
     { "IsRaidGroup", &LuaGroup::IsRaidGroup },
     { "IsBGGroup", &LuaGroup::IsBGGroup },
-    // {"IsBFGroup", &LuaGroup::IsBFGroup},                       // :IsBFGroup() - Returns true if the group is a battlefield group
+    {"IsBFGroup", &LuaGroup::IsBFGroup},                       // :IsBFGroup() - Returns true if the group is a battlefield group
     { "IsMember", &LuaGroup::IsMember },
     { "IsAssistant", &LuaGroup::IsAssistant },
     { "SameSubGroup", &LuaGroup::SameSubGroup },
