@@ -2337,13 +2337,13 @@ namespace LuaPlayer
     return 0;
     }*/
 
-    int KillGOCredit(lua_State* L, Player* player)
+   /* int KillGOCredit(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
     uint64 guid = Eluna::CHECKVAL<uint64>(L, 3);
     player->KillCreditGO(entry, guid);
     return 0;
-    }
+    }*/
 
     int KilledPlayerCredit(lua_State* L, Player* player)
     {
