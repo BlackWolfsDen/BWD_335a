@@ -651,7 +651,7 @@ ElunaRegister<Player> PlayerMethods[] =
     { "GroupEventHappens", &LuaPlayer::GroupEventHappens },                               // :GroupEventHappens(questId, worldObject) - Satisfies a group event for the questId with the world object
     { "KilledMonsterCredit", &LuaPlayer::KilledMonsterCredit },                           // :KilledMonsterCredit(entry) - Satisfies a monsterkill for the player
     {"KilledPlayerCredit", &LuaPlayer::KilledPlayerCredit},                          // :KilledPlayerCredit() - Satisfies a player kill for the player
-    {"KillGOCredit", &LuaPlayer::KillGOCredit},                                      // :KillGOCredit(GOEntry[, GUID]) - Credits the player for destroying a GO, guid is optional
+    // {"KillGOCredit", &LuaPlayer::KillGOCredit},                                      // :KillGOCredit(GOEntry[, GUID]) - Credits the player for destroying a GO, guid is optional
     { "TalkedToCreature", &LuaPlayer::TalkedToCreature },                                 // :TalkedToCreature(npcEntry, creature) - Satisfies creature talk objective for the player
 #if (!defined(TBC) && !defined(CLASSIC))
     { "ResetPetTalents", &LuaPlayer::ResetPetTalents },                                   // :ResetPetTalents() - Resets player's pet's talents
