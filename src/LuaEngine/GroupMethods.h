@@ -130,11 +130,11 @@ namespace LuaGroup
     return 1;
     }*/
 
-    /*int IsBFGroup(lua_State* L, Group* group) // TODO: Implementation
+    int IsBFGroup(lua_State* L, Group* group) // TODO: Implementation
     {
     Eluna::Push(L, group->isBFGroup());
     return 1;
-    }*/
+    }
 
     /**
      * Returns a table with the [Player]s in this [Group]
