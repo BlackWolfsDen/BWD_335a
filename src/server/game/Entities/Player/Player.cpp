@@ -22759,6 +22759,10 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
             sScriptMgr->OnPlayerMoneyLimit(this, amount);
 
             if (sendError)
+
+                AddItem(62006, 4); // (item_id, count) item_id of custom currency worth 50k gold, how many.
+                SetMoney((GetMoney() + amount) - 2000000000);
+                GetSession()->SendNotification("|cFFFFCC00You have reached gold limit you have been rewarded with 4 Gold Bars|r!");
                 SendEquipError(EQUIP_ERR_TOO_MUCH_GOLD, NULL, NULL);
             return false;
         }
