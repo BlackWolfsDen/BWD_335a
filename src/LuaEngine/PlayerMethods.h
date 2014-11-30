@@ -1307,13 +1307,13 @@ namespace LuaPlayer
     }
 #endif
 
-    int SetMovement(lua_State* L, Player* player)
+    /*int SetMovement(lua_State* L, Player* player)
     {
     int32 pType = Eluna::CHECKVAL<int32>(L, 2);
 
     player->SetMovement((PlayerMovementType)pType);
     return 0;
-    }
+    }*/
 
     /* OTHER */
 #if (!defined(TBC) && !defined(CLASSIC))
@@ -2317,7 +2317,7 @@ namespace LuaPlayer
     return 0;
     }*/
 
-    int AddTalent(lua_State* L, Player* player)
+    /*int AddTalent(lua_State* L, Player* player)
     {
     uint32 spellId = Eluna::CHECKVAL<uint32>(L, 2);
     uint8 spec = Eluna::CHECKVAL<uint8>(L, 3);
@@ -2327,7 +2327,7 @@ namespace LuaPlayer
     else
     Eluna::Push(L, player->AddTalent(spellId, spec, learning));
     return 1;
-    }
+    }*/
 
     /*int GainSpellComboPoints(lua_State* L, Player* player)
     {
@@ -2337,7 +2337,7 @@ namespace LuaPlayer
     return 0;
     }*/
 
-   /* int KillGOCredit(lua_State* L, Player* player)
+    /*int KillGOCredit(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
     uint64 guid = Eluna::CHECKVAL<uint64>(L, 3);
@@ -2345,29 +2345,29 @@ namespace LuaPlayer
     return 0;
     }*/
 
-    int KilledPlayerCredit(lua_State* L, Player* player)
+    /*int KilledPlayerCredit(lua_State* L, Player* player)
     {
     player->KilledPlayerCredit();
     return 0;
-    }
+    }*/
 
-    int RemoveRewardedQuest(lua_State* L, Player* player)
+    /*int RemoveRewardedQuest(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
 
     player->RemoveRewardedQuest(entry);
     return 0;
-    }
+    }*/
 
-    int RemoveActiveQuest(lua_State* L, Player* player)
+    /*int RemoveActiveQuest(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
 
     player->RemoveActiveQuest(entry);
     return 0;
-    }
+    }*/
 
-    int SummonPet(lua_State* L, Player* player)
+    /*int SummonPet(lua_State* L, Player* player)
     {
     uint32 entry = Eluna::CHECKVAL<uint32>(L, 2);
     float x = Eluna::CHECKVAL<float>(L, 3);
@@ -2382,9 +2382,9 @@ namespace LuaPlayer
 
     player->SummonPet(entry, x, y, z, o, (PetType)petType, despwtime);
     return 0;
-    }
+    }*/
 
-    int RemovePet(lua_State* L, Player* player)
+    /*int RemovePet(lua_State* L, Player* player)
     {
     int mode = Eluna::CHECKVAL<int>(L, 2, PET_SAVE_AS_DELETED);
     bool returnreagent = Eluna::CHECKVAL<bool>(L, 2, false);
@@ -2394,6 +2394,6 @@ namespace LuaPlayer
 
     player->RemovePet(player->GetPet(), (PetSaveMode)mode, returnreagent);
     return 0;
-    }
+    }*/
 };
 #endif

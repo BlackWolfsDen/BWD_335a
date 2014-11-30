@@ -1261,15 +1261,6 @@ void World::LoadConfigSettings(bool reload)
 
     m_bool_configs[CONFIG_IP_BASED_ACTION_LOGGING] = sConfigMgr->GetBoolDefault("Allow.IP.Based.Action.Logging", false);
 
-    //Grumboz VIP System
-    m_int_configs[CONFIG_VIP_MAX] = sConfigMgr->GetIntDefault("VIP.MAX", 6);
-    m_bool_configs[CONFIG_VIP_VOTE_ENABLE] = sConfigMgr->GetBoolDefault("VIP.VOTE.ENABLE", true);
-    m_int_configs[CONFIG_VIP_VOTE_COUNT] = sConfigMgr->GetIntDefault("VIP.VOTE.COUNT", 125);
-    m_int_configs[CONFIG_VIP_COIN_ID] = sConfigMgr->GetIntDefault("VIP.COIN", 63020);
-    m_int_configs[CONFIG_VIP_STONE_ID] = sConfigMgr->GetIntDefault("VIP.STONE", 63021);
-    m_int_configs[CONFIG_VIP_MAGIC_GOLD_ID] = sConfigMgr->GetIntDefault("VIP.MAGIC.GOLD", 44209);
-    m_int_configs[CONFIG_VIP_TP_BONUS] = sConfigMgr->GetIntDefault("VIP.TP.BONUS", 14);
-
     // AHBot
     m_int_configs[CONFIG_AHBOT_UPDATE_INTERVAL] = sConfigMgr->GetIntDefault("AuctionHouseBot.Update.Interval", 20);
 

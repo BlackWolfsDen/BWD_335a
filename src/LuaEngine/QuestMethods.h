@@ -175,10 +175,10 @@ namespace LuaQuest
         return 1;
     }
 
-    int GetMaxLevel(lua_State* L, Quest* quest)
+    /*int GetMaxLevel(lua_State* L, Quest* quest)
     {
     Eluna::Push(L, quest->GetMaxLevel());
     return 1;
-    }
+    }*/
 };
 #endif

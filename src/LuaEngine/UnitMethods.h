@@ -361,23 +361,23 @@ namespace LuaUnit
         return 1;
     }
 
-    int IsVisible(lua_State* L, Unit* unit)
+    /*int IsVisible(lua_State* L, Unit* unit)
     {
     Eluna::Push(L, unit->IsVisible());
     return 1;
-    }
+    }*/
 
-    int IsMoving(lua_State* L, Unit* unit)
+    /*int IsMoving(lua_State* L, Unit* unit)
     {
     Eluna::Push(L, unit->isMoving());
     return 1;
-    }
+    }*/
 
-    int IsFlying(lua_State* L, Unit* unit)
+    /*int IsFlying(lua_State* L, Unit* unit)
     {
     Eluna::Push(L, unit->IsFlying());
     return 1;
-    }
+    }*/
 
     /* GETTERS */
     int GetOwner(lua_State* L, Unit* unit)
@@ -826,13 +826,13 @@ namespace LuaUnit
         return 1;
     }
 
-    
+    /*
     int GetVehicle(lua_State* L, Unit* unit)
     {
     Eluna::Push(L, unit->GetVehicle());
     return 1;
     }
-   
+    */
 
     int GetCritterGUID(lua_State* L, Unit* unit)
     {
@@ -1169,33 +1169,33 @@ namespace LuaUnit
     }
 #endif
 
-    int SetStunned(lua_State* L, Unit* unit)
+    /*int SetStunned(lua_State* L, Unit* unit)
     {
     bool apply = Eluna::CHECKVAL<bool>(L, 2, true);
     unit->SetControlled(apply, UNIT_STATE_STUNNED);
     return 0;
-    }
+    }*/
 
-    int SetRooted(lua_State* L, Unit* unit)
+    /*int SetRooted(lua_State* L, Unit* unit)
     {
     bool apply = Eluna::CHECKVAL<bool>(L, 2, true);
     unit->SetControlled(apply, UNIT_STATE_ROOT);
     return 0;
-    }
+    }*/
 
-    int SetConfused(lua_State* L, Unit* unit)
+    /*int SetConfused(lua_State* L, Unit* unit)
     {
     bool apply = Eluna::CHECKVAL<bool>(L, 2, true);
     unit->SetControlled(apply, UNIT_STATE_CONFUSED);
     return 0;
-    }
+    }*/
 
-    int SetFeared(lua_State* L, Unit* unit)
+    /*int SetFeared(lua_State* L, Unit* unit)
     {
     bool apply = Eluna::CHECKVAL<bool>(L, 2, true);
     unit->SetControlled(apply, UNIT_STATE_FLEEING);
     return 0;
-    }
+    }*/
 
     /*int SetCanFly(lua_State* L, Unit* unit)
     {
@@ -1204,12 +1204,12 @@ namespace LuaUnit
     return 0;
     }*/
 
-    int SetVisible(lua_State* L, Unit* unit)
+    /*int SetVisible(lua_State* L, Unit* unit)
     {
     bool x = Eluna::CHECKVAL<bool>(L, 2, true);
     unit->SetVisible(x);
     return 0;
-    }
+    }*/
 
     /* OTHER */
     int ClearThreatList(lua_State* /*L*/, Unit* unit)
@@ -1832,17 +1832,17 @@ namespace LuaUnit
         return 0;
     }
 
-    int RestoreDisplayId(lua_State* L, Unit* unit)
+    /*int RestoreDisplayId(lua_State* L, Unit* unit)
     {
     unit->RestoreDisplayId();
     return 0;
-    }
+    }*/
 
-    int RestoreFaction(lua_State* L, Unit* unit)
+    /*int RestoreFaction(lua_State* L, Unit* unit)
     {
     unit->RestoreFaction();
     return 0;
-    }
+    }*/
 
     /*int RemoveBindSightAuras(lua_State* L, Unit* unit)
     {
