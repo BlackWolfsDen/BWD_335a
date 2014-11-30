@@ -1183,6 +1183,15 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_NUMTHREADS] = sConfigMgr->GetIntDefault("MapUpdate.Threads", 1);
     m_int_configs[CONFIG_MAX_RESULTS_LOOKUP_COMMANDS] = sConfigMgr->GetIntDefault("Command.LookupMaxResults", 0);
 
+    // Grumboz VIP System
+    m_bool_configs[CONFIG_VIP_VOTE_ENABLE]              = sConfigMgr->GetBoolDefault("VIP.VOTE_ENABLE", true);
+    m_int_configs[CONFIG_VIP_MAX_LEVEL]        = sConfigMgr->GetIntDefault("VIP.MAX", 4);
+    m_int_configs[CONFIG_VIP_VOTE_COUNT]        = sConfigMgr->GetIntDefault("VIP.VOTE_COUNT", 125);
+    m_int_configs[CONFIG_VIP_COIN_ID]        = sConfigMgr->GetIntDefault("VIP.COIN", 63020);
+    m_int_configs[CONFIG_VIP_STONE_ID]        = sConfigMgr->GetIntDefault("VIP.STONE", 63021);
+    m_int_configs[CONFIG_VIP_MAGIC_GOLD_ID]        = sConfigMgr->GetIntDefault("VIP.MAGIC_GOLD", 44209);
+    m_int_configs[CONFIG_VIP_TP_BONUS]        = sConfigMgr->GetIntDefault("VIP.TP_BONUS", 14);
+
     // Warden
     m_bool_configs[CONFIG_WARDEN_ENABLED]              = sConfigMgr->GetBoolDefault("Warden.Enabled", false);
     m_int_configs[CONFIG_WARDEN_NUM_MEM_CHECKS]        = sConfigMgr->GetIntDefault("Warden.NumMemChecks", 3);
@@ -1260,6 +1269,10 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_BIRTHDAY_TIME] = sConfigMgr->GetIntDefault("BirthdayTime", 1222964635);
 
     m_bool_configs[CONFIG_IP_BASED_ACTION_LOGGING] = sConfigMgr->GetBoolDefault("Allow.IP.Based.Action.Logging", false);
+
+    // Grumbo'z VIP System
+     m_int_configs[CONFIG_AHBOT_UPDATE_INTERVAL] = sConfigMgr->GetIntDefault("AuctionHouseBot.Update.Interval", 20);
+
 
     // AHBot
     m_int_configs[CONFIG_AHBOT_UPDATE_INTERVAL] = sConfigMgr->GetIntDefault("AuctionHouseBot.Update.Interval", 20);
