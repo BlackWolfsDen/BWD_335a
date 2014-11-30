@@ -22765,9 +22765,9 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                     GetSession()->SendNotification("|cFFFFCC00You have reached gold limit you have been rewarded with 4 Gold Bars|r!");
                 return false;
                 }
+        }
     }
-
-    return true;
+ return true;
 }
 
 bool Player::HasEnoughMoney(int32 amount) const
