@@ -22762,11 +22762,12 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                 {
                     AddItem(62006, 4); // (item_id, count) item_id of custom currency worth 50k gold, how many.
                     SetMoney((GetMoney() + amount) - 2000000000);
-                    GetSession()->SendAreaTriggerMessage("|cFFFFCC00You have reached gold limit you have been rewarded with 4 Gold Bars|r!");
+                    GetSession()->SendNotification("|cFFFFCC00You have reached gold limit you have been rewarded with 4 Gold Bars|r!");
                 return false;
                 }
     }
-return true;
+
+    return true;
 }
 
 bool Player::HasEnoughMoney(int32 amount) const
