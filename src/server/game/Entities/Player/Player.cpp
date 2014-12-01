@@ -22774,7 +22774,13 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                     uint64 Ptotal = GetMoney() + amount;
 
                     if(!AddItem(item_ID,  Icount))
-                        return false;
+
+                        sScriptMgr->OnPlayerMoneyLimit(this, amount);
+
+                            if (sendError)
+                                SendEquipError(EQUIP_ERR_TOO_MUCH_GOLD, NULL, NULL);
+                            return false;
+                     return false;
 
                     SetMoney(Ptotal - (Icount * 500000000));
                     ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
