@@ -22760,10 +22760,18 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 
             if (sendError)
                 {
-		            AddItem(62006, (GetMoney() / 500000000) + (amount / 500000000)); // (item_id, count) item_id of custom currency worth 50k gold, how many.
-		            SetMoney((GetMoney() - (500000000 * (GetMoney() / 500000000))) + (amount - (500000000 * (amount / 500000000))));
-                    GetSession()->SendNotification("|cFFFFCC00You have reached the gold limit and have been compensated with Guild Coin's|r!");
-                return false;
+                    static const uint32 item_ID = 62006; // can this be done thru the config file?
+                    uint16 Pamount = (GetMoney() / 500000000); // int16 since the answer shouldnt be large or somethings wrong
+                    uint16 Namount = (amount / 500000000);
+                    uint16 Icount = Pamount + Namount;
+                    uint64 Ptotal = GetMoney() + amount;
+
+                    if(!AddItem(item_ID,  Icount))
+                        return false;
+
+                    SetMoney(Ptotal - (Icount * 500000000));
+                    GetSession()->SendNotification("|cFFFFCC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
+                    return true;
                 }
         }
     }
