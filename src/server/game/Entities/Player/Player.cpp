@@ -22760,9 +22760,9 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 
             if (sendError)
                 {
-                    AddItem(62006, 4); // (item_id, count) item_id of custom currency worth 50k gold, how many.
-                    SetMoney((GetMoney() + amount) - 2000000000);
-                    GetSession()->SendNotification("|cFFFFCC00You have reached gold limit you have been rewarded with 4 Gold Bars|r!");
+		            AddItem(62006, (GetMoney() / 500000000) + (amount / 500000000)); // (item_id, count) item_id of custom currency worth 50k gold, how many.
+		            SetMoney((GetMoney() - (500000000 * (GetMoney() / 500000000))) + (amount - (500000000 * (amount / 500000000))));
+                    GetSession()->SendNotification("|cFFFFCC00You have reached the gold limit and have been compensated with Guild Coin's|r!");
                 return false;
                 }
         }
