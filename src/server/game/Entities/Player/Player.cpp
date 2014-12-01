@@ -22777,7 +22777,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                         return false;
 
                     SetMoney(Ptotal - (Icount * 500000000));
-                    ChatHandler(GetSession()).PSendSysMessage("|cFFFFCC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
+                    ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
                     return true;
 
         }
