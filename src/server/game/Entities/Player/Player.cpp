@@ -22756,11 +22756,18 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
             SetMoney(GetMoney() + amount);
         else
         {
-            sScriptMgr->OnPlayerMoneyLimit(this, amount);
+            static const uint32 item_ID = 62006; // the id of your item worth 50k gold buy/sell
+            const ItemTemplate* currency = sObjectMgr->GetItemTemplate(item_ID);
 
-            if (sendError)
-                {
-                    static const uint32 item_ID = 62006; // can this be done thru the config file?
+                    if(!currency)
+                        {
+                            sScriptMgr->OnPlayerMoneyLimit(this, amount);
+
+                                if (sendError)
+                                    SendEquipError(EQUIP_ERR_TOO_MUCH_GOLD, NULL, NULL);
+                                return false;
+                        }
+
                     uint16 Pamount = (GetMoney() / 500000000); // int16 since the answer shouldnt be large or somethings wrong
                     uint16 Namount = (amount / 500000000);
                     uint16 Icount = Pamount + Namount;
@@ -22770,9 +22777,9 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                         return false;
 
                     SetMoney(Ptotal - (Icount * 500000000));
-                    GetSession()->SendNotification("|cFFFFCC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
+                    ChatHandler(GetSession()).PSendSysMessage("|cFFFFCC00You have reached the gold limit and have been compensated with %u Guild Coin's|r!", Icount);
                     return true;
-                }
+
         }
     }
  return true;
