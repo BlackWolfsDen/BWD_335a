@@ -22751,24 +22751,22 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     uint16 item_ID = sWorld->getIntConfig(CONFIG_GOLD_CAP_ID);
     uint32 Ivalue = sWorld->getIntConfig(CONFIG_GOLD_CAP_VALUE);
     uint32 check = sWorld->getIntConfig(CONFIG_GOLD_CAP_CHECK);
-    uint64 Pmoney = GetMoney() + amount;
+    uint32 Pmoney = GetMoney() + amount;
 	uint32 Item = floor(Pmoney / Ivalue);
     uint16 Litem = 0;
     uint32 Icount = 0;
     uint32 Pitem = 0;
 
-ChatHandler(GetSession()).PSendSysMessage("ID %u VALUE %u CHECK %u", item_ID, Ivalue, check);
-
-        if(Pmoney > (Ivalue * check))
-            {
-            Pitem = floor(Pmoney / Ivalue);
+    if(GetMoney() > (Ivalue * check))
+        {
+            Pitem = Pmoney / Ivalue;
             Icount = Icount + Pitem;
             Pmoney = Pmoney - (Pitem * Ivalue);
-            }
+        }
 
     ChatHandler(GetSession()).PSendSysMessage("TALLY Pmoney %u Icount %u ", Pmoney, Icount);
 
-    SetMoney(Pmoney);
+        SetMoney(Pmoney);
 
         if(Icount > 0)
             {
@@ -22783,8 +22781,7 @@ ChatHandler(GetSession()).PSendSysMessage("ID %u VALUE %u CHECK %u", item_ID, Iv
             ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u valuable items.|r!", Icount);
             return false;
             }
-return false;
-}
+ }
 
 bool Player::HasEnoughMoney(int32 amount) const
 {

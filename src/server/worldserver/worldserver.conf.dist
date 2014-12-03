@@ -3284,3 +3284,33 @@ VIP.TP_BONUS = 14
 
 #
 ###################################################################################################
+###################################################################################################
+# Grumbo'z Gold Cap Work Around
+#
+# These settings provide a simple work around for gold cap.
+#
+# 	
+#	GOLD_CAP.ID
+#		Description: the id for an item worth buy/sell 50k gold. it will be used to compensate players.
+#		Default:     62006
+#
+
+GOLD_CAP.ID = 62006
+
+#
+#	GOLD_CAP.VALUE
+#		Description: the buy/sell value of the item.
+#		Default:     500000000 in copper (50,000 gold 00 silver 00 copper)
+
+GOLD_CAP.VALUE = 500000000
+
+#	GOLD_CAP.CHECK
+#		Description: at how much gold to inact the transfer. the value is a multiplier
+#		Default:  2   (GOLD_CAP.VALUE * 2) == 1000000000 copper or 100K gold
+#				do not go over a copper value of 2147483647.
+#			  0 = allways
+
+GOLD_CAP.CHECK = 2
+
+#
+###################################################################################################

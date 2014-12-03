@@ -1192,6 +1192,11 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_VIP_MAGIC_GOLD_ID]        = sConfigMgr->GetIntDefault("VIP.MAGIC_GOLD", 44209);
     m_int_configs[CONFIG_VIP_TP_BONUS]        = sConfigMgr->GetIntDefault("VIP.TP_BONUS", 14);
 
+    // Grumbo'z Gold Cap work around
+    m_int_configs[CONFIG_GOLD_CAP_ID]        = sConfigMgr->GetIntDefault("GOLD_CAP.ID", 62006);
+    m_int_configs[CONFIG_GOLD_CAP_VALUE]        = sConfigMgr->GetIntDefault("GOLD_CAP.VALUE", 500000000);
+    m_int_configs[CONFIG_GOLD_CAP_CHECK]        = sConfigMgr->GetIntDefault("GOLD_CAP.CHECK", 0);
+
     // Warden
     m_bool_configs[CONFIG_WARDEN_ENABLED]              = sConfigMgr->GetBoolDefault("Warden.Enabled", false);
     m_int_configs[CONFIG_WARDEN_NUM_MEM_CHECKS]        = sConfigMgr->GetIntDefault("Warden.NumMemChecks", 3);
