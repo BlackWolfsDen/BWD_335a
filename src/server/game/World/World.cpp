@@ -1194,7 +1194,6 @@ void World::LoadConfigSettings(bool reload)
 
     // Grumbo'z Gold Cap work around
     m_int_configs[CONFIG_GOLD_CAP_ID]        = sConfigMgr->GetIntDefault("GOLD_CAP.ID", 62006);
-    m_int_configs[CONFIG_GOLD_CAP_CHECK]        = sConfigMgr->GetIntDefault("GOLD_CAP.CHECK", 4);
 
     // Warden
     m_bool_configs[CONFIG_WARDEN_ENABLED]              = sConfigMgr->GetBoolDefault("Warden.Enabled", false);

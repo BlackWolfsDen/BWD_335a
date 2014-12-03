@@ -3292,20 +3292,13 @@ VIP.TP_BONUS = 14
 # 	
 #	GOLD_CAP.ID
 #		Description: the id for an item worth buy/sell 50k gold. it will be used to compensate players.
-#		Default:     62006 The recomended value for the item used should be less than 2147483647
-#				reecommended value should be 500000000 or 50K gold. or (1k to 100k) gold
+#		Default:     62006 The recomended value for the item used should be less than 2147483647.
+#				reecommended value should be 500000000 50K gold. or (1k to 100k) gold.
+#				when a player reaches or passes the gold cap then the player will be compensated 
+#				this item in exchange for its value in gold.
 #
 
 GOLD_CAP.ID = 62006
-
-#	GOLD_CAP.CHECK
-#		Description: at how much gold to inact the transfer. the value is a multiplier based on the item's value
-#		Default:  4   (VALUE * 4) == 
-#			  do not go over a copper value of 2147483647.
-#			  0 = allways
-#			  recommended gold value to inact the transfer when player hits 200k gold.
-
-GOLD_CAP.CHECK = 4
 
 #
 ###################################################################################################

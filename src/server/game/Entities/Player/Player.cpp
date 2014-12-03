@@ -22743,17 +22743,16 @@ void Player::InitPrimaryProfessions()
 
 bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 {
+// MAX_MONEY_AMOUNT // == 2147483647
+
     if (!amount)
         return true;
 
     sScriptMgr->OnPlayerMoneyChanged(this, amount);
 
     uint16 item_ID = sWorld->getIntConfig(CONFIG_GOLD_CAP_ID);
-    uint32 check = sWorld->getIntConfig(CONFIG_GOLD_CAP_CHECK);
-    uint64 Pmoney = GetMoney() + amount;
-    uint16 Litem = 0;
+    uint64 Money = (GetMoney() + amount);
     uint32 Icount = 0;
-    uint32 Pitem = 0;
 
     const ItemTemplate* currency = sObjectMgr->GetItemTemplate(item_ID);
 
@@ -22769,14 +22768,14 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     char const* Iname = currency->Name1.c_str();
     uint32 Ivalue = currency->SellPrice;
 
-       if(Pmoney > (Ivalue * check) - 1)
+
+       if(Money > (MAX_MONEY_AMOUNT - 1))
         {
-        Pitem = floor(Pmoney / Ivalue);
-        Icount = Icount + Pitem;
-        Pmoney = Pmoney - (Pitem * Ivalue);
+        Icount = (Money / Ivalue);
+        Money = (Money - ((Money / Ivalue) * Ivalue));
         }
 
-    SetMoney(Pmoney);
+    SetMoney(Money);
 
         if(Icount > 0)
             {
