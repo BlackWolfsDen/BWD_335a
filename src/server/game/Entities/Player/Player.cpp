@@ -22749,10 +22749,8 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     sScriptMgr->OnPlayerMoneyChanged(this, amount);
 
     uint16 item_ID = sWorld->getIntConfig(CONFIG_GOLD_CAP_ID);
-    uint32 Ivalue = sWorld->getIntConfig(CONFIG_GOLD_CAP_VALUE);
     uint32 check = sWorld->getIntConfig(CONFIG_GOLD_CAP_CHECK);
     uint64 Pmoney = GetMoney() + amount;
-	uint32 Item = floor(Pmoney / Ivalue);
     uint16 Litem = 0;
     uint32 Icount = 0;
     uint32 Pitem = 0;
@@ -22768,14 +22766,15 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
             return false;
         }
 
-        if(Pmoney > (Ivalue * check) - 1)
+    char const* Iname = currency->Name1.c_str();
+    uint32 Ivalue = currency->SellPrice;
+
+       if(Pmoney > (Ivalue * check) - 1)
         {
         Pitem = floor(Pmoney / Ivalue);
         Icount = Icount + Pitem;
         Pmoney = Pmoney - (Pitem * Ivalue);
         }
-
-    char const* Iname = currency->Name1.c_str();
 
     SetMoney(Pmoney);
 
