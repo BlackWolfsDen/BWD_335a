@@ -22757,16 +22757,12 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     uint32 Icount = 0;
     uint32 Pitem = 0;
 
-ChatHandler(GetSession()).PSendSysMessage("ID %u VALUE %u CHECK %u", item_ID, Ivalue, check);
-
         if(Pmoney > (Ivalue * check))
             {
             Pitem = floor(Pmoney / Ivalue);
             Icount = Icount + Pitem;
             Pmoney = Pmoney - (Pitem * Ivalue);
             }
-
-    ChatHandler(GetSession()).PSendSysMessage("TALLY Pmoney %u Icount %u ", Pmoney, Icount);
 
     SetMoney(Pmoney);
 
