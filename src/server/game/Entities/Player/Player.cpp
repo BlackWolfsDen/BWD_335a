@@ -22757,12 +22757,25 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     uint32 Icount = 0;
     uint32 Pitem = 0;
 
-        if(Pmoney > (Ivalue * check))
-            {
-            Pitem = floor(Pmoney / Ivalue);
-            Icount = Icount + Pitem;
-            Pmoney = Pmoney - (Pitem * Ivalue);
-            }
+    const ItemTemplate* currency = sObjectMgr->GetItemTemplate(item_ID);
+
+        if (!currency)
+        {
+            sScriptMgr->OnPlayerMoneyLimit(this, amount);
+
+            if (sendError)
+                SendEquipError(EQUIP_ERR_TOO_MUCH_GOLD, NULL, NULL);
+            return false;
+        }
+
+        if(Pmoney > (Ivalue * check) - 1)
+        {
+        Pitem = floor(Pmoney / Ivalue);
+        Icount = Icount + Pitem;
+        Pmoney = Pmoney - (Pitem * Ivalue);
+        }
+
+    char const* Iname = currency->Name1.c_str();
 
     SetMoney(Pmoney);
 
@@ -22776,7 +22789,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                         SendEquipError(EQUIP_ERR_TOO_MUCH_GOLD, NULL, NULL);
                     return false;
                 }
-            ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u valuable items.|r!", Icount);
+            ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u %s's.|r!", Icount, Iname);
             return false;
             }
 return false;
