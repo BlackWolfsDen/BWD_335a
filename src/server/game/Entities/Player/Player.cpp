@@ -22771,8 +22771,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     char const* Iname = currency->Name1.c_str();
     uint32 Ivalue = currency->SellPrice;
 
-
-        if(Guild_Loot_Enable)
+        if(Guild_Loot_Enable > 0)
 
             if(amount > 99)
 
