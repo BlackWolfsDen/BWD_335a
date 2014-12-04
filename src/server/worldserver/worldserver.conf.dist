@@ -3301,4 +3301,12 @@ VIP.TP_BONUS = 14
 GOLD_CAP.ID = 62006
 
 #
+#	GUILD_LOOT.ENABLE
+#		Description: If a player is in a guild this will allow 5% of loot above 99 copper to be 
+#		Default:     deposited into the players guild bank.
+#
+
+GUILD_LOOT.ENABLE = 1
+
+#
 ###################################################################################################

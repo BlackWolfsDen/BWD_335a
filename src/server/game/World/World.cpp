@@ -1184,7 +1184,7 @@ void World::LoadConfigSettings(bool reload)
     m_int_configs[CONFIG_MAX_RESULTS_LOOKUP_COMMANDS] = sConfigMgr->GetIntDefault("Command.LookupMaxResults", 0);
 
     // Grumboz VIP System
-    m_bool_configs[CONFIG_VIP_VOTE_ENABLE]              = sConfigMgr->GetBoolDefault("VIP.VOTE_ENABLE", true);
+    m_bool_configs[CONFIG_VIP_VOTE_ENABLE]      = sConfigMgr->GetBoolDefault("VIP.VOTE_ENABLE", true);
     m_int_configs[CONFIG_VIP_MAX_LEVEL]        = sConfigMgr->GetIntDefault("VIP.MAX", 4);
     m_int_configs[CONFIG_VIP_VOTE_COUNT]        = sConfigMgr->GetIntDefault("VIP.VOTE_COUNT", 125);
     m_int_configs[CONFIG_VIP_COIN_ID]        = sConfigMgr->GetIntDefault("VIP.COIN", 63020);
@@ -1194,6 +1194,7 @@ void World::LoadConfigSettings(bool reload)
 
     // Grumbo'z Gold Cap work around
     m_int_configs[CONFIG_GOLD_CAP_ID]        = sConfigMgr->GetIntDefault("GOLD_CAP.ID", 62006);
+    m_bool_configs[GUILD_LOOT_ENABLE]        = sConfigMgr->GetBoolDefault("GUILD_LOOT.ENABLE", false);
 
     // Warden
     m_bool_configs[CONFIG_WARDEN_ENABLED]              = sConfigMgr->GetBoolDefault("Warden.Enabled", false);
