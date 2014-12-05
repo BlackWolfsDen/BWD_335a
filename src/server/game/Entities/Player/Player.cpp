@@ -22771,7 +22771,8 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 
     char const* Iname = currency->Name1.c_str();
     uint32 Ivalue = currency->SellPrice;
-
+    char const* Gname = GetGuildName().c_str();
+    uint16 pct = floor(Pguild * 100);
 
        if(Guild* guild = GetGuild())
 
@@ -22780,7 +22781,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                 if(amount > (int64(Vguild)))
                    {
                        Gmoney = amount * float(Pguild);
-                       ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits go to your guild. %u copper.", Gmoney);
+                       ChatHandler(GetSession()).PSendSysMessage("%u%s `O` your profits go to your guild %s. %u copper.", pct, "%", Gname, Gmoney);
                        guild->HandleMemberDepositMoney(GetSession(), Gmoney);
                        Money = (Money - Gmoney);
                    }
