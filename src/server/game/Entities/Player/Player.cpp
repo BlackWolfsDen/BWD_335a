@@ -22751,10 +22751,10 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     sScriptMgr->OnPlayerMoneyChanged(this, amount);
 
     uint16 item_ID = sWorld->getIntConfig(CONFIG_GOLD_CAP_ID);
-    bool Guild_Loot_Enable =  sWorld->getBoolConfig(GUILD_LOOT_ENABLE);
-    float Gloot = 0.05f;
+    bool Eguild = sWorld->getBoolConfig(CONFIG_GUILD_LOOT_ENABLE);
+    uint32 Vguild = sWorld->getIntConfig(CONFIG_GUILD_LOOT_VALUE);
     uint64 Money = (GetMoney() + amount);
-    uint64 Gmoney = floor(amount * Gloot);
+    uint32 Gmoney = 0;
     uint32 Icount = 0;
 
     const ItemTemplate* currency = sObjectMgr->GetItemTemplate(item_ID);
@@ -22771,16 +22771,18 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     char const* Iname = currency->Name1.c_str();
     uint32 Ivalue = currency->SellPrice;
 
-        if(Guild_Loot_Enable > 0)
 
-            if(amount > 99)
+       if(Guild* guild = GetGuild())
 
-                if(Guild* guild = GetGuild())
-                    {
-                    Money = (Money - Gmoney);
-                    ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits goes to your guild. %u copper.", Gmoney);
-                    guild->HandleMemberDepositMoney(GetSession(), Gmoney);
-                    }
+            if(Eguild)
+
+                if(amount > (int64(Vguild)))
+                   {
+                       Gmoney = amount * 0.05f;
+                       ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits goes to your guild. %u copper.", Gmoney);
+                       guild->HandleMemberDepositMoney(GetSession(), Gmoney);
+                       Money = (Money - Gmoney);
+                   }
 
        if(Money > (MAX_MONEY_AMOUNT - 1))
             {

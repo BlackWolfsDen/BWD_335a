@@ -3303,10 +3303,24 @@ GOLD_CAP.ID = 62006
 #
 #	GUILD_LOOT.ENABLE
 #		Description: If a player is in a guild this will allow 5% of loot above 99 copper to be 
-#		Default:     deposited into the players guild bank.
-#
+#				deposited into the players guild bank.
+#		Default: 1 on // 0=off 1=on Bool
 
 GUILD_LOOT.ENABLE = 1
+
+#
+#	GUILD_LOOT.VALUE
+#		Description: amount that the guild loot will start in copper.
+#		Default: 100 in copper = 1 silver,0 copper.
+
+GUILD_LOOT.VALUE = 100
+
+#
+#	GUILD_LOOT.PERCENTAGE
+#		Description: the percentage of looted gold that will transfer to Guild Bank.
+#		Default: 0.05 5% of profit . float value.
+
+GUILD_LOOT.PERCENTAGE = 0.05
 
 #
 ###################################################################################################
