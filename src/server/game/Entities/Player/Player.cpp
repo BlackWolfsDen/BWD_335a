@@ -22780,7 +22780,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                 if(amount > (int64(Vguild)))
                    {
                        Gmoney = amount * float(Pguild);
-                       ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits goes to your guild. %u copper.", Gmoney);
+                       ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits go to your guild. %u copper.", Gmoney);
                        guild->HandleMemberDepositMoney(GetSession(), Gmoney);
                        Money = (Money - Gmoney);
                    }
@@ -22806,9 +22806,9 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
                     return false;
                 }
             ChatHandler(GetSession()).PSendSysMessage("|cFF00CC00You have reached the gold limit and have been compensated with %u %s's.|r!", Icount, Iname);
-            return false;
+            return true;
             }
-return false;
+return true;
 }
 
 bool Player::HasEnoughMoney(int32 amount) const
