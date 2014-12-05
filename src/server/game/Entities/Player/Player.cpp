@@ -22743,7 +22743,7 @@ void Player::InitPrimaryProfessions()
 
 bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 {
-// MAX_MONEY_AMOUNT // == 2147483647
+// MAX_MONEY_AMOUNT /uint32/ == 2147483647
 
     if (!amount)
         return true;
@@ -22753,7 +22753,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
     uint16 item_ID = sWorld->getIntConfig(CONFIG_GOLD_CAP_ID);
     bool Eguild = sWorld->getBoolConfig(CONFIG_GUILD_LOOT_ENABLE);
     uint32 Vguild = sWorld->getIntConfig(CONFIG_GUILD_LOOT_VALUE);
-//    float Pguild = sWorld->getFloatConfig(CONFIG_GUILD_LOOT_PERCENTAGE); // not working right yet used as 1.05 rather than 0.05
+    float Pguild = sWorld->getFloatConfig(CONFIG_GUILD_LOOT_PERCENTAGE);
     uint64 Money = (GetMoney() + amount);
     uint32 Gmoney = 0;
     uint32 Icount = 0;
@@ -22779,7 +22779,7 @@ bool Player::ModifyMoney(int32 amount, bool sendError /*= true*/)
 
                 if(amount > (int64(Vguild)))
                    {
-                       Gmoney = amount * 0.05f;
+                       Gmoney = amount * float(Pguild);
                        ChatHandler(GetSession()).PSendSysMessage("A bit `O` your profits goes to your guild. %u copper.", Gmoney);
                        guild->HandleMemberDepositMoney(GetSession(), Gmoney);
                        Money = (Money - Gmoney);

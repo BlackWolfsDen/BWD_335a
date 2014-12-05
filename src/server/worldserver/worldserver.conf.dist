@@ -3316,7 +3316,7 @@ GUILD_LOOT.ENABLE = 1
 GUILD_LOOT.VALUE = 100
 
 #
-#	GUILD_LOOT.PERCENTAGE -- Not Implemented.
+#	GUILD_LOOT.PERCENTAGE
 #		Description: the percentage of looted gold that will transfer to Guild Bank.
 #		Default: 0.05 5% of profit . float value.
 
