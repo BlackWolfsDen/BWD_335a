@@ -3324,3 +3324,86 @@ GUILD_LOOT.PERCENTAGE = 0.05
 
 #
 ###################################################################################################
+# Grumbo'z VIP System
+#
+# These settings provide a flexibility to the system.
+#
+# 	
+#	VIP.MAX
+#		Description: Max VIP Level for VIP System. max Uint32 value.
+#		Default:     6
+#
+
+VIP.MAX = 6
+
+#	VIP.VOTE.ENABE
+#		Description: Votes can earn higher vip ranks.
+#		Default: 1 . 0 off // 1 on.
+#
+
+VIP.VOTE_ENABLE = 1
+
+#	VIP.OFFSETA
+#		Description: float multiplier for each vip rank.
+#		Default:     0.05f 5% muliplier per rank
+#
+
+VIP.VIP.OFFSETA = 0.05
+
+#
+#	VIP.VOTE.COUNT
+#		Description: how many Votes to earn each level of VIP.
+#		Default: 125 votes per.
+#
+
+VIP.VOTE_COUNT = 125
+
+#
+#	VIP.COIN
+#		Description: an item that is clickable to show a players VIP stats
+#		Default: 63020
+#
+
+
+VIP.COIN = 63020
+
+#
+#	VIP.STONE
+#		Description: an item that is clickable and will increase a players VIP level.
+#		Default: 63021
+#
+
+VIP.STONE =  63021
+
+#
+#	VIP.MAGIC.GOLD
+#		Description: just custom currency
+#		Default: 44209
+#
+
+VIP.MAGIC_GOLD = 44209
+
+#
+#	VIP.TP.BONUS
+#		Description: how many extra TP's to award per VIP level.
+#		Default: 
+#
+
+VIP.TP_BONUS = 14
+
+#
+######################################################################################################################################################################################################
+###################################################################################################
+# Grumbo'z Guild Warz
+#
+# This setting allows multi-realm usage. you can have a db for each realm and a unique Guild Warz setup. 
+# 
+# 	guild_warz_DB.address
+#		Description: sql DB name. Used for multi-realm usage.
+#		Default: guild_warz_335
+
+guild_warz_DB.address = "guild_warz_335"
+
+#
+#
+######################################################################################################################################################################################################

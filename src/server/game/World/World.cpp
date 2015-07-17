@@ -1264,6 +1264,16 @@ void World::LoadConfigSettings(bool reload)
     m_float_configs[CONFIG_STATS_LIMITS_BLOCK] = sConfigMgr->GetFloatDefault("Stats.Limits.Block", 95.0f);
     m_float_configs[CONFIG_STATS_LIMITS_CRIT] = sConfigMgr->GetFloatDefault("Stats.Limits.Crit", 95.0f);
 
+// Grumbo'z VIP System //
+    m_bool_configs[CONFIG_VIP_VOTE_ENABLE]      = sConfigMgr->GetBoolDefault("VIP.VOTE_ENABLE", false);
+    m_int_configs[CONFIG_VIP_MAX_LEVEL]        = sConfigMgr->GetIntDefault("VIP.MAX", 4);
+    m_float_configs[CONFIG_VIP_OFFSET]       = sConfigMgr->GetFloatDefault("VIP.OFFSET", 0.05f);
+    m_int_configs[CONFIG_VIP_VOTE_COUNT]        = sConfigMgr->GetIntDefault("VIP.VOTE_COUNT", 125);
+    m_int_configs[CONFIG_VIP_COIN_ID]        = sConfigMgr->GetIntDefault("VIP.COIN", 63020);
+    m_int_configs[CONFIG_VIP_STONE_ID]        = sConfigMgr->GetIntDefault("VIP.STONE", 63021);
+    m_int_configs[CONFIG_VIP_MAGIC_GOLD_ID]        = sConfigMgr->GetIntDefault("VIP.MAGIC_GOLD", 44209);
+    m_int_configs[CONFIG_VIP_TP_BONUS]        = sConfigMgr->GetIntDefault("VIP.TP_BONUS", 14);
+
     //packet spoof punishment
     m_int_configs[CONFIG_PACKET_SPOOF_POLICY] = sConfigMgr->GetIntDefault("PacketSpoof.Policy", (uint32)WorldSession::DosProtection::POLICY_KICK);
     m_int_configs[CONFIG_PACKET_SPOOF_BANMODE] = sConfigMgr->GetIntDefault("PacketSpoof.BanMode", (uint32)BAN_ACCOUNT);

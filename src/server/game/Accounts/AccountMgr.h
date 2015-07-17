@@ -42,6 +42,15 @@ enum PasswordChangeSecurity
 #define MAX_ACCOUNT_STR 16
 #define MAX_EMAIL_STR 64
 
+// Grumbo'z VIP System //
+struct MyData
+{
+    uint32 acctid;
+    uint8 vip;
+    uint64 mg;
+    uint64 votes;
+};
+
 namespace rbac
 {
 typedef std::map<uint32, rbac::RBACPermission*> RBACPermissionsContainer;
@@ -69,6 +78,30 @@ class AccountMgr
         static AccountOpResult ChangeRegEmail(uint32 accountId, std::string newEmail);
         static bool CheckPassword(uint32 accountId, std::string password);
         static bool CheckEmail(uint32 accountId, std::string newEmail);
+
+// Grumbo'z VIP System //
+// engine
+    // getters
+        static uint8 GetVIPMAX();
+		static uint32 GetVIPVOTECOUNT();
+        static uint64 GetVIPCoinID();
+        static uint64 GetVIPStoneID();
+        static uint64 GetMGId();
+        static float GetVIPOffset();
+// player
+    // getters
+        static void LoadVIP(uint32 accountId);
+        static void UnLoadVIP(uint32 accountId);
+        static uint8 GetVIP(uint32 accountId);
+        static uint64 GetMG(uint32 accountId);
+        static uint64 GetVotes(uint32 accountId);
+    // setters
+        static uint8 SetVIP(uint32 accountId, uint8 Pvip);
+        static uint64 AddMG(Player* player, uint64 Pmg);
+        static uint64 AddVotes(Player* player, uint64 Pvotes);
+        static uint64 TakeMG(Player* player, uint64 Pmg);
+        static uint64 TakeVotes(Player* player, uint64 Pvotes);
+// // // // // // // // //
 
         static uint32 GetId(std::string const& username);
         static uint32 GetSecurity(uint32 accountId);

@@ -579,6 +579,8 @@ void WorldSession::LogoutPlayer(bool save)
         if (Map* _map = _player->FindMap())
             _map->RemovePlayerFromMap(_player, true);
 
+        AccountMgr::UnLoadVIP(GetAccountId());
+
         SetPlayer(NULL); //! Pointer already deleted during RemovePlayerFromMap
 
         //! Send the 'logout complete' packet to the client
@@ -1108,7 +1110,10 @@ void WorldSession::SetPlayer(Player* player)
 
     // set m_GUID that can be used while player loggined and later until m_playerRecentlyLogout not reset
     if (_player)
+    {
         m_GUIDLow = _player->GetGUIDLow();
+        AccountMgr::LoadVIP(GetAccountId());
+    }
 }
 
 void WorldSession::InitializeQueryCallbackParameters()

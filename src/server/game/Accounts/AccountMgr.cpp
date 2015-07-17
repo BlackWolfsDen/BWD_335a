@@ -25,6 +25,7 @@
 #include "Util.h"
 #include "SHA1.h"
 #include "WorldSession.h"
+#include "Chat.h"
 
 AccountMgr::AccountMgr() { }
 
@@ -266,6 +267,253 @@ uint32 AccountMgr::GetId(std::string const& username)
     PreparedQueryResult result = LoginDatabase.Query(stmt);
 
     return (result) ? (*result)[0].GetUInt32() : 0;
+}
+
+// Grumbo'z VIP System //
+std::unordered_map<uint32, MyData> VIP;
+
+void AccountMgr::LoadVIP(uint32 accountId)
+{
+    if(accountId > 0)
+        {
+        if(!VIP[accountId].vip == true)
+            {
+            uint8 Pvip = 1;
+            uint64 Pmg = 0;
+            uint64 Pvotes = 0;
+
+            uint8 VIP_MAX = sWorld->getIntConfig(CONFIG_VIP_MAX_LEVEL);
+            uint32 VIP_VOTE_COUNT = sWorld->getIntConfig(CONFIG_VIP_VOTE_COUNT);
+
+            PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_LOAD_VIP);
+            stmt->setUInt32(0, accountId);
+            PreparedQueryResult result = LoginDatabase.Query(stmt);
+
+                if (!result)
+                {
+                    TC_LOG_INFO("server.loading", "XX ERROR Loading a VIP table ID %u XX", accountId);
+                }
+
+
+                 if(result)
+                    { // unpacks the result result into fields and appoint column to variable.
+                        Field* fields = result->Fetch();
+                        Pvip   = fields[0].GetUInt8();
+                        Pmg    = fields[1].GetUInt64();
+                        Pvotes = fields[2].GetUInt64();
+                    }
+
+
+                Pvip = (Pvotes / VIP_VOTE_COUNT);
+
+
+                if(Pvotes < VIP_VOTE_COUNT)
+                    {
+                        Pvip = 1;
+                    }
+
+
+                if(Pvotes > (VIP_VOTE_COUNT * VIP_MAX))
+                    {
+                        Pvip = VIP_MAX;
+                    }
+
+                    PreparedStatement* stmt2 = LoginDatabase.GetPreparedStatement(LOGIN_SET_VIP);
+                    stmt2->setUInt8(0, Pvip);
+                    stmt2->setUInt32(1, accountId);
+                    LoginDatabase.Execute(stmt2);
+
+                    MyData& data = VIP[accountId]; // like Lua table VIP[acctId].vip
+                   // Save the DB values to the MyData object
+                    data.acctid = accountId;
+                    data.vip       = Pvip;
+                    data.mg        = Pmg;
+                    data.votes     = Pvotes;
+
+            TC_LOG_INFO("server.loading", ">> ACCT ID %u VIP %u LOADED >>", accountId, VIP[accountId].vip);
+            }
+        }
+}
+
+void AccountMgr::UnLoadVIP(uint32 accountId)
+{
+VIP[accountId] = {};
+TC_LOG_INFO("server.loading", "<< ACCT ID %u  VIP UNLOADED  <<", accountId);
+}
+
+uint8 AccountMgr::GetVIPMAX()
+{
+uint8 VIP_MAX = sWorld->getIntConfig(CONFIG_VIP_MAX_LEVEL);
+return VIP_MAX;
+}
+uint32 AccountMgr::GetVIPVOTECOUNT()
+{
+uint32 VIP_VOTE_COUNT = sWorld->getIntConfig(CONFIG_VIP_VOTE_COUNT);
+return VIP_VOTE_COUNT;
+}
+uint64 AccountMgr::GetVIPCoinID()
+{
+uint64 VIP_COIN_ID = sWorld->getIntConfig(CONFIG_VIP_COIN_ID);
+return VIP_COIN_ID;
+}
+uint64 AccountMgr::GetVIPStoneID()
+{
+uint64 VIP_STONE_ID = sWorld->getIntConfig(CONFIG_VIP_STONE_ID);
+return VIP_STONE_ID;
+}
+uint64 AccountMgr::GetMGId()
+{
+uint64 MG_ID = sWorld->getIntConfig(CONFIG_VIP_MAGIC_GOLD_ID);
+return MG_ID;
+}
+float AccountMgr::GetVIPOffset()
+{
+    float VIP_OFFSET = sWorld->getFloatConfig(CONFIG_VIP_OFFSET);
+    return VIP_OFFSET;
+}
+uint8 AccountMgr::GetVIP(uint32 accountId)
+{
+    if(accountId > 0)
+    {
+        uint8 VIP_MAX = sWorld->getIntConfig(CONFIG_VIP_MAX_LEVEL);
+        uint32 VIP_VOTE_COUNT = sWorld->getIntConfig(CONFIG_VIP_VOTE_COUNT);
+
+        uint8 Pvip = VIP[accountId].vip;
+        uint64 Pvotes = VIP[accountId].votes;
+
+
+        if(!Pvip)
+        {
+            AccountMgr::LoadVIP(accountId);
+        }
+        uint8 Tvip = (Pvotes / VIP_VOTE_COUNT);
+
+
+        if(Pvotes < VIP_VOTE_COUNT)
+            {
+                Tvip = 1;
+            }
+
+
+        if(Pvotes > (VIP_VOTE_COUNT * VIP_MAX))
+            {
+                Tvip = VIP_MAX;
+            }
+        if(Tvip != Pvip)
+            {
+                PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_VIP);
+                stmt->setUInt8(0, Tvip);
+                stmt->setUInt32(1, accountId);
+                LoginDatabase.Execute(stmt);
+            }
+    return uint8(Tvip);
+    }
+return false;
+}
+//
+uint64 AccountMgr::GetMG(uint32 accountId)
+{
+uint64 Pmg = VIP[accountId].mg;
+
+
+    if(!Pmg)
+    {
+		AccountMgr::LoadVIP(accountId);
+    }
+
+return VIP[accountId].mg;
+}
+uint64 AccountMgr::GetVotes(uint32 accountId)
+{
+uint64 Pvotes = VIP[accountId].votes;
+
+
+    if(!Pvotes)
+    {
+		AccountMgr::LoadVIP(accountId);
+    }
+
+return Pvotes;
+}
+//
+uint8 AccountMgr::SetVIP(uint32 accountId, uint8 Pvip)
+{
+
+uint8 VIP_MAX = sWorld->getIntConfig(CONFIG_VIP_MAX_LEVEL);
+
+   if(Pvip > VIP_MAX)
+   {
+       Pvip = VIP_MAX;
+   }
+
+    VIP[accountId].vip = 0;
+    PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_VIP);
+    stmt->setUInt8(0, Pvip);
+    stmt->setUInt32(1, accountId);
+    LoginDatabase.Execute(stmt);
+
+    VIP[accountId].vip = Pvip;
+	
+	return true;
+}
+uint64 AccountMgr::AddMG(Player* player, uint64 Pmg)
+{
+    uint32 accountId = player->GetSession()->GetAccountId();
+    uint64 Nmg = VIP[accountId].mg + Pmg;
+
+    PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_MG);
+    stmt->setUInt64(0, Pmg);
+    stmt->setUInt32(1, accountId);
+    LoginDatabase.Execute(stmt);
+
+    VIP[accountId].mg = Pmg;
+    ChatHandler(player->GetSession()).PSendSysMessage("Banker +%u b.c.", Pmg);
+    return true;
+}
+uint64 AccountMgr::AddVotes(Player* player, uint64 Pvotes)
+{
+    uint32 accountId = player->GetSession()->GetAccountId();
+    uint64 Nvotes = VIP[accountId].votes + Pvotes;
+
+    PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_VOTES);
+    stmt->setUInt64(0, Nvotes);
+    stmt->setUInt32(1, accountId);
+    LoginDatabase.Execute(stmt);
+
+    VIP[accountId].votes = Nvotes;
+
+    ChatHandler(player->GetSession()).PSendSysMessage("Banker +%u votes.", Pvotes);
+    return true;
+}
+// takers
+uint64 AccountMgr::TakeMG(Player* player, uint64 Pmg)
+{
+    uint32 accountId = player->GetSession()->GetAccountId();
+    uint64 Nmg = VIP[accountId].mg - Pmg;
+
+    PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_MG);
+    stmt->setUInt64(0, Pmg);
+    stmt->setUInt32(1, accountId);
+    LoginDatabase.Execute(stmt);
+
+    VIP[accountId].mg = Nmg;
+
+    ChatHandler(player->GetSession()).PSendSysMessage("Banker -%u b.c.", Pmg);
+    return true;
+}
+uint64 AccountMgr::TakeVotes(Player* player, uint64 Pvotes)
+{
+    uint32 accountId = player->GetSession()->GetAccountId();
+    uint64 Nvotes = VIP[accountId].votes - Pvotes;
+
+    PreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SET_VOTES);
+    stmt->setUInt64(0, Nvotes);
+    stmt->setUInt32(1, accountId);
+    LoginDatabase.Execute(stmt);
+
+    VIP[accountId].votes = Nvotes;
+    ChatHandler(player->GetSession()).PSendSysMessage("Banker -%u votes.", Pvotes);
+    return true;
 }
 
 uint32 AccountMgr::GetSecurity(uint32 accountId)

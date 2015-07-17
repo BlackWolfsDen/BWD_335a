@@ -56,7 +56,13 @@ void RegisterGlobals(lua_State* L)
     lua_register(L, "RegisterBGEvent", &LuaGlobalFunctions::RegisterBGEvent);                               // RegisterBGEvent(event, function)
 
     // Getters
-    lua_register(L, "GetLuaEngine", &LuaGlobalFunctions::GetLuaEngine);
+	lua_register(L, "GetVIPMAX", &LuaGlobalFunctions::GetVIPMAX);			                                // GetVIPMAX()
+	lua_register(L, "GetVIPVOTECOUNT", &LuaGlobalFunctions::GetVIPVOTECOUNT);		                        // GetVIPVOTECOUNT()
+	lua_register(L, "GetVIPCoinID", &LuaGlobalFunctions::GetVIPCoinID);		                                // GetVIPCoinID()
+	lua_register(L, "GetVIPStoneID", &LuaGlobalFunctions::GetVIPStoneID);		                            // GetVIPStoneID()
+	lua_register(L, "GetVIPOffset", &LuaGlobalFunctions::GetVIPOffset);		                                // GetVIPOffset()
+ 	lua_register(L, "GetMGId", &LuaGlobalFunctions::GetMGId);       	                                    // GetMGId()
+	lua_register(L, "GetLuaEngine", &LuaGlobalFunctions::GetLuaEngine);
     lua_register(L, "GetCoreName", &LuaGlobalFunctions::GetCoreName);
     lua_register(L, "GetCoreVersion", &LuaGlobalFunctions::GetCoreVersion);
     lua_register(L, "GetCoreExpansion", &LuaGlobalFunctions::GetCoreExpansion);
@@ -401,6 +407,9 @@ ElunaRegister<Unit> UnitMethods[] =
 ElunaRegister<Player> PlayerMethods[] =
 {
     // Getters
+    { "GetVIP", &LuaPlayer::GetVIP },                                             // :GetVIP() -- returns account vip level value.
+    { "GetMG", &LuaPlayer::GetMG },                                               // :GetMG() -- returns account magic gold amount value.
+    { "GetVotes", &LuaPlayer::GetVotes },                                         // :GetVotes() -- returns account vote amount value.
     { "GetSelection", &LuaPlayer::GetSelection },                                 // :GetSelection()
     { "GetGMRank", &LuaPlayer::GetGMRank },                                       // :GetSecurity()
     { "GetGuildId", &LuaPlayer::GetGuildId },                                     // :GetGuildId() - nil on no guild
@@ -487,6 +496,11 @@ ElunaRegister<Player> PlayerMethods[] =
 #endif
 
     // Setters
+    { "SetVIP", &LuaPlayer::SetVIP },                             // :SetVIP(v) v=(1 to 255)
+    { "AddMG", &LuaPlayer::AddMG },                               // :AddMG(v) v=(1 to uit64)
+    { "AddVotes", &LuaPlayer::AddVotes },                         // :AddVotes(v) v=(1 to uint64)
+    { "TakeMG", &LuaPlayer::TakeMG },                               // :TakeMG(v) v=(1 to uit64)
+    { "TakeVotes", &LuaPlayer::TakeVotes },                         // :TakeVotes(v) v=(1 to uint64)
     { "AdvanceSkillsToMax", &LuaPlayer::AdvanceSkillsToMax },     // :AdvanceSkillsToMax() - Advances all currently known skills to the currently known max level
     { "AdvanceSkill", &LuaPlayer::AdvanceSkill },                 // :AdvanceSkill(skill_id, step) - Advances skill by ID and the amount(step)
     { "AdvanceAllSkills", &LuaPlayer::AdvanceAllSkills },         // :AdvanceAllSkills(value) - Advances all current skills to your input(value)
@@ -622,7 +636,7 @@ ElunaRegister<Player> PlayerMethods[] =
     { "SendAreaTriggerMessage", &LuaPlayer::SendAreaTriggerMessage },                     // :SendAreaTriggerMessage(message) - Sends a yellow message in the middle of your screen
     { "SendNotification", &LuaPlayer::SendNotification },                                 // :SendNotification(message) - Sends a red message in the middle of your screen
     { "SendPacket", &LuaPlayer::SendPacket },                                             // :SendPacket(packet, selfOnly) - Sends a packet to player or everyone around also if selfOnly is false
-    { "SendAddonMessage", &LuaPlayer::SendAddonMessage },                                 // :SendAddonMessage(prefix, message, channel, receiver) - Sends an addon message to the player. 
+    { "SendAddonMessage", &LuaPlayer::SendAddonMessage },                                 // :SendAddonMessage(prefix, message, channel, receiver) - Sends an addon message to the player.
     { "SendVendorWindow", &LuaPlayer::SendVendorWindow },                                 // :SendVendorWindow(unit) - Sends the unit's vendor window to the player
     { "ModifyMoney", &LuaPlayer::ModifyMoney },                                           // :ModifyMoney(amount[, sendError]) - Modifies (does not set) money (copper count) of the player. Amount can be negative to remove copper
     { "LearnSpell", &LuaPlayer::LearnSpell },                                             // :LearnSpell(id) - learns the given spell

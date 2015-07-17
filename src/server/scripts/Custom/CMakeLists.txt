@@ -13,6 +13,6 @@
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
 #  ${sources_Custom}
+Custom/Grumboz_Guild_Warz.cpp
 )
-
 message("  -> Prepared: Custom")

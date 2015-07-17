@@ -953,6 +953,59 @@ namespace LuaPlayer
         return 1;
     }
 
+// Grumbo'z VIP System //
+    int GetVIP(lua_State* L, Player* player)
+    {
+        Eluna::Push(L, sAccountMgr->GetVIP(player->GetSession()->GetAccountId()));
+        return 1;
+    }
+//
+	int GetMG(lua_State* L, Player* player)
+    {
+        Eluna::Push(L, sAccountMgr->GetMG(player->GetSession()->GetAccountId()));
+        return 1;
+    }
+//
+	int GetVotes(lua_State* L, Player* player)
+    {
+        Eluna::Push(L, sAccountMgr->GetVotes(player->GetSession()->GetAccountId()));
+        return 1;
+    }
+//
+    int SetVIP(lua_State* L, Player* player)
+    {
+        uint8 Pvip = Eluna::CHECKVAL<uint8>(L, 2);
+ 	Eluna::Push(L, sAccountMgr->SetVIP(player->GetSession()->GetAccountId(), Pvip)); //
+        return 1;
+    }
+//
+    int AddMG(lua_State* L, Player* player)
+    {
+	uint64 Pmg = Eluna::CHECKVAL<uint64>(L, 2);
+ 	Eluna::Push(L, sAccountMgr->AddMG(player, Pmg)); //
+        return 1;
+    }
+//
+    int AddVotes(lua_State* L, Player* player)
+    {
+	uint64 Pvotes = Eluna::CHECKVAL<uint64>(L, 2);
+ 	Eluna::Push(L, sAccountMgr->AddVotes(player, Pvotes)); //
+        return 1;
+    }
+//
+    int TakeMG(lua_State* L, Player* player)
+    {
+	uint64 Pmg = Eluna::CHECKVAL<uint64>(L, 2);
+ 	Eluna::Push(L, sAccountMgr->TakeMG(player, Pmg)); //
+        return 1;
+    }
+//
+    int TakeVotes(lua_State* L, Player* player)
+    {
+	uint64 Pvotes = Eluna::CHECKVAL<uint64>(L, 2);
+ 	Eluna::Push(L, sAccountMgr->TakeVotes(player, Pvotes)); //
+        return 1;
+    }
     int GetAccountId(lua_State* L, Player* player)
     {
         Eluna::Push(L, player->GetSession()->GetAccountId());

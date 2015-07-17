@@ -91,4 +91,7 @@ void WorldDatabaseConnection::DoPrepareStatements()
     PrepareStatement(WORLD_DEL_DISABLES, "DELETE FROM disables WHERE entry = ? AND sourceType = ?", CONNECTION_ASYNC);
     PrepareStatement(WORLD_UPD_CREATURE_ZONE_AREA_DATA, "UPDATE creature SET zoneId = ?, areaId = ? WHERE guid = ?", CONNECTION_ASYNC);
     PrepareStatement(WORLD_UPD_GAMEOBJECT_ZONE_AREA_DATA, "UPDATE gameobject SET zoneId = ?, areaId = ? WHERE guid = ?", CONNECTION_ASYNC);
+
+	PrepareStatement(GUILD_WARZ_ADD_LOCATION, (Guild_Warz_Create_Zone + "(entry, map_id, area_id, zone_id, guild_name, guild_id, team) VALUES(? , ? , ? , ? , ? , ? , ?);").c_str(), CONNECTION_ASYNC);
+	PrepareStatement(GUILD_WARZ_UPD_LOCATION_DATA, (Guild_Warz_Update_Zone + " SET ? = ? WHERE entry = ?;").c_str(), CONNECTION_ASYNC);
 }

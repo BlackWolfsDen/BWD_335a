@@ -9,6 +9,44 @@
 
 namespace LuaGlobalFunctions
 {
+ // Grumbo'z VIP System //
+	int GetVIPMAX(lua_State* L)
+    {
+		uint8 VipMax = sAccountMgr->GetVIPMAX();
+		Eluna::Push(L, VipMax);
+        return 1;
+    }
+    int GetVIPVOTECOUNT(lua_State* L)
+    {
+		uint32 VoteCount = sAccountMgr->GetVIPVOTECOUNT();
+		Eluna::Push(L, VoteCount);
+        return 1;
+    }
+    int GetVIPCoinID(lua_State* L)
+    {
+		uint32 CoinID = sAccountMgr->GetVIPCoinID();
+		Eluna::Push(L, CoinID);
+        return 1;
+    }
+    int GetVIPStoneID(lua_State* L)
+    {
+		uint32 StoneID = sAccountMgr->GetVIPStoneID();
+		Eluna::Push(L, StoneID);
+        return 1;
+    }
+    int GetMGId(lua_State* L)
+    {
+        uint64 MGID = sAccountMgr->GetMGId();
+        Eluna::Push(L, MGID);
+        return 1;
+    }
+    int GetVIPOffset(lua_State* L)
+    {
+        float offset = sAccountMgr->GetVIPOffset();
+		Eluna::Push(L, offset);
+        return 1;
+    }
+// // //
     /**
      * Returns lua engine name. Currently `ElunaEngine`
      *
